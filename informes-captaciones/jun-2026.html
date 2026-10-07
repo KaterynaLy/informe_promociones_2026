@@ -1,0 +1,61 @@
+<div id="modal-captaciones-junio" class="modal-overlay">
+    <div class="modal-container" style="max-width: 1100px;">
+        <div class="modal-header">
+            <div>
+                <h2>Seguimiento de Captaciones y Promotores — Junio 2026</h2>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                    Oportunidades comerciales y relaciones con promotoras — Registros de Junio 2026
+                </p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button onclick="downloadCaptacionesCSV('junio')" class="btn-report" style="background-color: #16a34a; font-size: 12px; padding: 6px 12px;">
+                    📥 Descargar Excel / CSV
+                </button>
+                <button class="modal-close" onclick="closeModal('modal-captaciones-junio')">&times;</button>
+            </div>
+        </div>
+
+        <div style="background: var(--accent-light); padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border);">
+            <h4 style="color: var(--primary); margin-bottom: 8px; font-size: 14px;">📁 Dossieres y Teasers Disponibles</h4>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px;">
+                <a href="https://drive.google.com/file/d/1ZbTP-WTItlN1cHjIZKtIrBGIeB0vIWYI/view?usp=sharing" target="_blank" class="text-accent">🔗 La Katria</a> |
+                <a href="https://drive.google.com/file/d/1fA2o_W-MlWLTxzziIUpQnSJeS_rrIuok/view?usp=sharing" target="_blank" class="text-accent">🔗 Cala Mijas Suelo</a>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div style="overflow-x: auto;">
+                <table id="table-captaciones-junio" style="font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th>Responsable</th>
+                            <th>Periodo</th>
+                            <th>Empresa / Promotor</th>
+                            <th>Ubicación</th>
+                            <th>Promoción / Proyecto</th>
+                            <th>Contacto</th>
+                            <th>Estado</th>
+                            <th>Fase</th>
+                            <th>Observaciones</th>
+                            <th>Dossier</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Patricia Vida</td><td>Junio 2026</td><td>Proyecto Miraflores</td><td>—</td><td>36 viv., 15 locales, 56 garajes</td><td>Ole D. Sigurdsson</td><td>Propuesta presentada</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Honorarios de comercialización del 3%.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Junio 2026</td><td>La Katria (Higuerón)</td><td>—</td><td>Suelo urbanizable (196 viv.)</td><td>Ole D. Sigurdsson</td><td>Propuesta presentada</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Valorado en 12,25 M€. Honorarios 3%.</td><td><a href="https://drive.google.com/file/d/1ZbTP-WTItlN1cHjIZKtIrBGIeB0vIWYI/view?usp=sharing" target="_blank" class="text-accent" style="font-weight:bold;">📄 Dossier</a></td></tr>
+                        <tr><td>Patricia Vida</td><td>Junio 2026</td><td>Grupo Q</td><td>La Cala de Mijas</td><td>60 pareadas</td><td>Pepe</td><td>Invitación a concurso</td><td>Seguimiento</td><td>Previsto incluir a Gilmar en el concurso.</td><td><a href="https://drive.google.com/file/d/1fA2o_W-MlWLTxzziIUpQnSJeS_rrIuok/view?usp=sharing" target="_blank" class="text-accent" style="font-weight:bold;">📄 Dossier</a></td></tr>
+                        <tr><td>Patricia Vida</td><td>Junio 2026</td><td>Rincón de la Victoria</td><td>—</td><td>83 viviendas plurifamiliares</td><td>Ricardo Domenech</td><td>Seguimiento activo</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Reunión mantenida con colaborador vinculado.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Junio 2026</td><td>Huerta Belón (Marbella)</td><td>—</td><td>Proyecto residencial 30 viv.</td><td>Abu</td><td>Seguimiento activo</td><td>Seguimiento</td><td>Promoción residencial medio-alto en seguimiento.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Junio 2027</td><td>CORK OAK MANSION</td><td>Sotogrande / Valderrama</td><td>Villas de lujo</td><td>Pedro Gonzales Armas</td><td>Reuniones para exclusiva</td><td>Inicial / estudio</td><td>Se ofrecieron parcelas de Lake Essence.</td><td>—</td></tr>
+                        <tr><td>Ignacio Segura</td><td>Jun-Ago 2026</td><td>ALEXCAR S.L.</td><td>El Ejido (Almería)</td><td>AURUM ALMERIMAR (60 viv.)</td><td>Juan Carlos Rodríguez</td><td>Pendiente decisión Gilmar</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Estudio interno en fase final para aceptación de comercialización.</td><td>—</td></tr>
+                        <tr><td>Ignacio Segura</td><td>Junio 2026</td><td>GLENFRUIN S.L.</td><td>Mijas</td><td>Sector SUP-S.18 Mijas (486 viv.)</td><td>Juan Ramón Montoya</td><td>Seguimiento septiembre</td><td>Seguimiento</td><td>Pendiente de aprobación de urbanización.</td><td>—</td></tr>
+                        <tr><td>Ignacio Segura</td><td>Junio 2026</td><td>PROMOBYS S.A.</td><td>Tíjola (Almería)</td><td>Actuaciones urbanísticas</td><td>Estanislao Berruezo</td><td>En negociación</td><td>Inicial / estudio</td><td>Interés como comercializador y PM.</td><td>—</td></tr>
+                        <tr><td>María Macías</td><td>Mayo 2026</td><td>PMG Euro</td><td>Fuengirola</td><td>Edificio Los Boliches</td><td>—</td><td>En negociación</td><td>Inicial / estudio</td><td>Posible comercialización directa por promotor.</td><td>—</td></tr>
+                        <tr><td>María Macías</td><td>Junio 2026</td><td>TOP Gestión</td><td>—</td><td>Oportunidades colaboración</td><td>Pedro Velásquez</td><td>Seguimiento activo</td><td>Seguimiento</td><td>Contacto para futuras oportunidades.</td><td>—</td></tr>
+                        <tr><td>María Macías</td><td>Junio 2026</td><td>Adventus Promotora</td><td>—</td><td>5 Villas en Calle Plumaria</td><td>—</td><td>Seguimiento activo</td><td>Seguimiento</td><td>Valorar futuras fórmulas de colaboración.</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

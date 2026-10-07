@@ -1,0 +1,23 @@
+CORRECCIÓN DE DATOS - 06/10/2026
+
+Se ha corregido el origen del desfase monetario en la hoja Produccion de plantillas/datos_mes.xlsx.
+
+CAUSA:
+Los valores de ProdTotal, Gilmar y Agencias estaban almacenados 100 veces por encima del valor real. La aplicación JavaScript NO aplica ningún multiplicador; lee los números del Excel directamente mediante XLSX.utils.sheet_to_json(..., raw:true).
+
+CORRECCIÓN:
+Se han corregido las columnas ProdTotal, Gilmar y Agencias dividiendo sus valores por 100. El formato numérico se mantiene con dos decimales.
+
+ProdTotal correcto:
+Enero 106.186,50 €
+Febrero 217.586,04 €
+Marzo 240.377,05 €
+Abril 47.842,50 €
+Mayo 317.902,10 €
+Junio 66.464,85 €
+Julio 238.427,50 €
+Agosto 71.877,50 €
+Septiembre 73.640,00 €
+TOTAL 1.380.304,04 €
+
+Con esta corrección, Gilmar y Agencias mantienen la suma de cada fila y sus totales quedan en 589.716,22 € y 790.587,82 €, respectivamente.

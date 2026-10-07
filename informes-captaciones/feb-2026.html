@@ -1,0 +1,46 @@
+<div id="modal-captaciones-febrero" class="modal-overlay">
+    <div class="modal-container" style="max-width: 1100px;">
+        <div class="modal-header">
+            <div>
+                <h2>Seguimiento de Captaciones y Promotores — Febrero 2026</h2>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                    Oportunidades comerciales y relaciones con promotoras — Registros de Febrero 2026
+                </p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button onclick="downloadCaptacionesCSV('febrero')" class="btn-report" style="background-color: #16a34a; font-size: 12px; padding: 6px 12px;">
+                    📥 Descargar Excel / CSV
+                </button>
+                <button class="modal-close" onclick="closeModal('modal-captaciones-febrero')">&times;</button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div style="overflow-x: auto;">
+                <table id="table-captaciones-febrero" style="font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th>Responsable</th>
+                            <th>Periodo</th>
+                            <th>Empresa / Promotor</th>
+                            <th>Ubicación</th>
+                            <th>Promoción / Proyecto</th>
+                            <th>Contacto</th>
+                            <th>Estado</th>
+                            <th>Fase</th>
+                            <th>Observaciones</th>
+                            <th>Dossier</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Patricia Vida</td><td>Febrero 2026</td><td>Santangelo Sur</td><td>Santangelo Sur</td><td>Nuevo Proyecto</td><td>Alonso Sibajas</td><td>Pendiente cita</td><td>Inicial / estudio</td><td>A la espera de avances en el departamento de urbanismo para continuar.</td><td>—</td></tr>
+                        <tr><td>—</td><td>Febrero 2026</td><td>Suelo Campanario</td><td>El Campanario</td><td>Uso Comercial / Restaurante</td><td>Rafa</td><td>En estudio</td><td>Inicial / estudio</td><td>Uso únicamente comercial. Se valora restaurante con música y aparcamiento inferior.</td><td>—</td></tr>
+                        <tr><td>—</td><td>Febrero 2026</td><td>Ikonia</td><td>—</td><td>Búsqueda de Suelos</td><td>Director Comercial</td><td>Pendiente propuestas</td><td>Inicial / estudio</td><td>Reunión mantenida; pendientes de recibir nuevas propuestas de suelos.</td><td>—</td></tr>
+                        <tr><td>—</td><td>Febrero 2026</td><td>Promotora Santangelo</td><td>Santangelo</td><td>Definición de Producto</td><td>—</td><td>En definición</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Encargado vuelo de vistas para fijar precios; asesoramiento en amenities y calidades.</td><td>—</td></tr>
+                        <tr><td>—</td><td>Febrero 2026</td><td>Actividad General</td><td>Toda la zona</td><td>Resumen Comercial Febrero</td><td>—</td><td>Informe de mercado</td><td>Seguimiento</td><td>Volumen bajo de visitas por mal tiempo y falta de AVE; se prevé repunte en primavera.</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

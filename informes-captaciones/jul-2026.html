@@ -1,0 +1,66 @@
+<div id="modal-captaciones-julio" class="modal-overlay">
+    <div class="modal-container" style="max-width: 1100px;">
+        <div class="modal-header">
+            <div>
+                <h2>Seguimiento de Captaciones y Promotores — Julio 2026</h2>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                    Oportunidades comerciales y relaciones con promotoras — Registros de Julio 2026
+                </p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button onclick="downloadCaptacionesCSV('julio')" class="btn-report" style="background-color: #16a34a; font-size: 12px; padding: 6px 12px;">
+                    📥 Descargar Excel / CSV
+                </button>
+                <button class="modal-close" onclick="closeModal('modal-captaciones-julio')">&times;</button>
+            </div>
+        </div>
+
+        <div style="background: var(--accent-light); padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border);">
+            <h4 style="color: var(--primary); margin-bottom: 8px; font-size: 14px;">📁 Dossieres y Teasers Disponibles</h4>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px;">
+                <a href="https://drive.google.com/file/d/1iCAYVZsSnNbRoltPRqQVd33yhEwPpY8t/view?usp=sharing" target="_blank" class="text-accent">🔗 Casa Padre Residencies</a> |
+                <a href="https://drive.google.com/file/d/1Wf5G_-9exZOnZS0rHdouycgvSxZOeQ_d/view?usp=sharing" target="_blank" class="text-accent">🔗 El Secreto de Benahavís</a> |
+                <a href="https://drive.google.com/file/d/1U8Nm9NeXKfdII8-rVAwTbIP6fHO9LObd/view?usp=sharing" target="_blank" class="text-accent">🔗 Altos de Islantilla</a>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div style="overflow-x: auto;">
+                <table id="table-captaciones-julio" style="font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th>Responsable</th>
+                            <th>Periodo</th>
+                            <th>Empresa / Promotor</th>
+                            <th>Ubicación</th>
+                            <th>Promoción / Proyecto</th>
+                            <th>Contacto</th>
+                            <th>Estado</th>
+                            <th>Fase</th>
+                            <th>Observaciones</th>
+                            <th>Dossier</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Ricardo Doménech</td><td>Málaga Centro</td><td>Oportunidad Hotelera</td><td>Ricardo Doménech</td><td>Análisis inicial</td><td>Inicial / estudio</td><td>Operación que incluye hotel y subarriendo de local colindante (Buena Vista Gastrobar: 3.500 €/mes subarriendo vs 1.700 €/mes arrendamiento; dif. 21.600 €/año).</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Grupo Barambio</td><td>El Palo (Málaga)</td><td>Proyecto Residencial El Palo</td><td>Adolfo Barambio</td><td>Contacto realizado</td><td>Seguimiento</td><td>Reunión fijada para septiembre aprovechando su visita a Málaga.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Suelos Axarquía</td><td>Torre del Mar</td><td>2 Suelos Plurifamiliares</td><td>—</td><td>Pendiente documentación</td><td>Inicial / estudio</td><td>Oportunidad recibida compuesta por dos suelos. En espera de dossier para análisis técnico.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Edificios Vacacionales</td><td>Málaga Centro</td><td>2 Edificios Alquiler Turístico</td><td>—</td><td>Pendiente documentación</td><td>Inicial / estudio</td><td>Identificados dos inmuebles completos en venta destinados a uso vacacional en el centro urbano.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Promoción Don Enrique</td><td>Mijas</td><td>30 Unidades Plurifamiliares</td><td>—</td><td>Captación avanzada</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Proceso en fase final. Factible incorporación a la cartera comercial durante septiembre.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Félix Sancho</td><td>Elviria</td><td>Proyecto Elviria (~500 u.)</td><td>Félix Sancho</td><td>Contacto realizado</td><td>Seguimiento</td><td>Proyecto de gran escala (~500 u., apartahotel y comercial). Reunión fijada en septiembre.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Casa Padre</td><td>Marbella</td><td>63 viviendas de lujo</td><td>Félix Sancho y Sankar</td><td>Propuesta presentada</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Proyecto conjunto. En búsqueda de estructura de financiación e inversores.</td><td><a href="https://drive.google.com/file/d/1iCAYVZsSnNbRoltPRqQVd33yhEwPpY8t/view?usp=sharing" target="_blank" class="text-accent" style="font-weight:bold;">📄 Dossier</a></td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Benjusan</td><td>Benalmádena</td><td>Santángelo Sur</td><td>Alfonso Serrano</td><td>Pendiente de licencia</td><td>Seguimiento</td><td>Reunión agendada para septiembre supeditada a la obtención de la licencia urbanística.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Promoción Torremuelle</td><td>—</td><td>Desarrollo residencial</td><td>Modesto</td><td>Pendiente de reunión</td><td>Seguimiento</td><td>Reunión en septiembre para concretar estrategia comercial y posible lanzamiento ese mes.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>DEYBELDA</td><td>—</td><td>Secreto de Benahavís (8 u.)</td><td>Manuel Rodríguez</td><td>En negociación</td><td><span style="color: #16a34a; font-weight:bold;">Avanzada</span></td><td>Propuesta enviada; nueva reunión en septiembre.</td><td><a href="https://drive.google.com/file/d/1Wf5G_-9exZOnZS0rHdouycgvSxZOeQ_d/view?usp=sharing" target="_blank" class="text-accent" style="font-weight:bold;">📄 Dossier</a></td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Estudio Alonso Sibajas</td><td>Elviria</td><td>Villas Elviria e Islantilla</td><td>Alonso Sibajas</td><td>Seguimiento activo</td><td>Seguimiento</td><td>Fase de segregación de parcelas.</td><td><a href="https://drive.google.com/file/d/1U8Nm9NeXKfdII8-rVAwTbIP6fHO9LObd/view?usp=sharing" target="_blank" class="text-accent" style="font-weight:bold;">📄 Dossier</a></td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>One Eden Group</td><td>Nueva Andalucía</td><td>Desarrollo residencial</td><td>Ed Allison-Wright</td><td>Invitación a concurso</td><td>Seguimiento</td><td>Pendiente de ampliación de densidad urbanística.</td><td>—</td></tr>
+                        <tr><td>Patricia Vida</td><td>Julio 2026</td><td>Planetdrive</td><td>—</td><td>Colaboración comercial</td><td>—</td><td>Colaboración estratégica</td><td>Acción Activada</td><td>Material promocional insertado en flota de vehículos.</td><td>—</td></tr>
+                        <tr><td>María Macías</td><td>Julio 2026</td><td>Activitas Solaris</td><td>Benalmádena</td><td>Suelo 54 viviendas</td><td>Jacobo</td><td>Oportunidad en desarrollo</td><td>Seguimiento</td><td>Exclusiva actual KW. Posible opción estratégica Gilmar.</td><td>—</td></tr>
+                        <tr><td>María Macías</td><td>Julio 2026</td><td>INSUR</td><td>—</td><td>Captación de suelo</td><td>Juan Conejo</td><td>Colaboración estratégica</td><td>Inicial / estudio</td><td>Interés permanente en suelo residencial en la zona.</td><td>—</td></tr>
+                        <tr><td>Ruth Moya</td><td>Julio 2026</td><td>Aedas / Desarrollo</td><td>—</td><td>Relación de desarrollo</td><td>Patricia Olid / David González</td><td>Seguimiento activo</td><td>Inicial / estudio</td><td>Contacto institucional iniciado vía CEO; seguimiento pendiente de respuesta.</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
