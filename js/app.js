@@ -441,6 +441,66 @@ function renderizarPortfolio(datos) {
     });
   if (elemHeaderUnidades) elemHeaderUnidades.textContent = totalPteVender;
 }
+function renderizarPteCobro(datos) {
+  const tbody = document.querySelector("#tabla-pte-cobro tbody");
+  if (!tbody || !datos || datos.length === 0) return;
+  tbody.innerHTML = "";
+
+  let totalUnidadesPte = 0;
+  let totalProduccionPte = 0;
+
+  datos.forEach((row) => {
+    // Procura a promoção em qualquer variação de nome de chave
+    const promocion =
+      row.promocion || row.promocion || Object.values(row)[0] || "";
+    if (!promocion) return;
+
+    // Obtém as unidades cobradas pendentes
+    const unidades = parseNumeroEs(
+      row.ptedecobrounidades ||
+        row["ptedecobro,unidades"] ||
+        row.ptedecobro ||
+        row.unidades
+    );
+
+    // Obtém o valor em euros da produção pendente
+    const prodPte = parseNumeroEs(
+      row.cantidadenproduccionpte ||
+        row["cantidadenproduccionpte,€"] ||
+        row.produccionpte ||
+        row.cantidadenproduccionpte
+    );
+
+    totalUnidadesPte += unidades;
+    totalProduccionPte += prodPte;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${promocion}</strong></td>
+      <td class="text-right">${unidades}</td>
+      <td class="text-right">${prodPte.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+      })}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Linha de Totais da tabela
+  const trTotal = document.createElement("tr");
+  trTotal.style.backgroundColor = "var(--bg)";
+  trTotal.style.fontWeight = "bold";
+  trTotal.innerHTML = `
+    <td>TOTAL PENDIENTE DE COBRO</td>
+    <td class="text-right">${totalUnidadesPte}</td>
+    <td class="text-right text-accent">${totalProduccionPte.toLocaleString(
+      "es-ES",
+      { style: "currency", currency: "EUR" }
+    )}</td>
+  `;
+  tbody.appendChild(trTotal);
+}
+
 
 function actualizarCardsSuperiores(
   totalAcumulado,
