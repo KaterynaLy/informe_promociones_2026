@@ -280,49 +280,45 @@ function renderizarProduccion(datos) {
       tr.classList.add("highlight-julio");
     }
 
-    const detalle = row.detallehtml || row.detalle || "—";
-
     tr.innerHTML = `
-            <td><strong>${nombreMes}</strong></td>
-            <td class="text-right">${prod.toLocaleString("es-ES", {
-              style: "currency",
-              currency: "EUR",
-            })}</td>
-            <td class="text-right">${gilmar.toLocaleString("es-ES", {
-              style: "currency",
-              currency: "EUR",
-            })}</td>
-            <td class="text-right">${agencias.toLocaleString("es-ES", {
-              style: "currency",
-              currency: "EUR",
-            })}</td>
-            <td class="text-right">${unidades.toLocaleString("es-ES")}</td>
-            <td class="text-right">${detalle}</td>
-        `;
+      <td><strong>${nombreMes}</strong></td>
+      <td class="text-right">${prod.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+      })}</td>
+      <td class="text-right">${gilmar.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+      })}</td>
+      <td class="text-right">${agencias.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+      })}</td>
+      <td class="text-right">${unidades.toLocaleString("es-ES")}</td>
+    `;
     tbody.appendChild(tr);
   });
 
-  // Fila Totales
+  // Fila de Totales
   const trTotal = document.createElement("tr");
   trTotal.style.backgroundColor = "var(--bg)";
   trTotal.style.fontWeight = "bold";
   trTotal.innerHTML = `
-        <td>TOTAL ACUMULADO</td>
-        <td class="text-right text-accent">${totalAcumulado.toLocaleString(
-          "es-ES",
-          { style: "currency", currency: "EUR" }
-        )}</td>
-        <td class="text-right">${totalGilmar.toLocaleString("es-ES", {
-          style: "currency",
-          currency: "EUR",
-        })}</td>
-        <td class="text-right">${totalAgencias.toLocaleString("es-ES", {
-          style: "currency",
-          currency: "EUR",
-        })}</td>
-        <td class="text-right">${totalUnidades.toLocaleString("es-ES")}</td>
-        <td class="text-right">—</td>
-    `;
+    <td>TOTAL ACUMULADO</td>
+    <td class="text-right text-accent">${totalAcumulado.toLocaleString(
+      "es-ES",
+      { style: "currency", currency: "EUR" }
+    )}</td>
+    <td class="text-right">${totalGilmar.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    })}</td>
+    <td class="text-right">${totalAgencias.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    })}</td>
+    <td class="text-right">${totalUnidades.toLocaleString("es-ES")}</td>
+  `;
   tbody.appendChild(trTotal);
 
   actualizarCardsSuperiores(
@@ -331,6 +327,119 @@ function renderizarProduccion(datos) {
     totalAgencias,
     totalUnidades
   );
+}
+
+function renderizarPortfolio(datos) {
+  const tbody = document.querySelector("#tabla-portfolio tbody");
+  if (!tbody || !datos || datos.length === 0) return;
+  tbody.innerHTML = "";
+
+  let totalVendidas = 0,
+    totalCobradas = 0,
+    totalPteCobrar = 0,
+    totalUnidades = 0,
+    totalPteVender = 0,
+    totalEstProduccion = 0;
+
+  datos.forEach((row) => {
+    const tr = document.createElement("tr");
+
+    let pct = parseNumeroEs(row.pctventa || row.pct);
+    if (pct > 0 && pct <= 1) pct = Math.round(pct * 100);
+    else pct = Math.round(pct);
+
+    const vendidas = parseNumeroEs(row.vendidas);
+    const cobradas = parseNumeroEs(row.cobradas);
+    const pteCobrar = parseNumeroEs(
+      row.ptedecobro || row.pte_cobro || row.ptecobrar
+    );
+    const totUnid = parseNumeroEs(
+      row.totunid || row.totunidades || row.totalunidades
+    );
+    const pteVender = parseNumeroEs(row.ptevender || row.pte_vender);
+    const estProduccion = parseNumeroEs(
+      row.estproduccion || row.est_produccion || row.produccion
+    );
+
+    totalVendidas += vendidas;
+    totalCobradas += cobradas;
+    totalPteCobrar += pteCobrar;
+    totalUnidades += totUnid;
+    totalPteVender += pteVender;
+    totalEstProduccion += estProduccion;
+
+    const promocion = row.promocion || "";
+    const zona = row.zona || "";
+
+    tr.innerHTML = `
+      <td><strong>${promocion}</strong></td>
+      <td>${zona}</td>
+      <td class="text-right">${vendidas}</td>
+      <td class="text-right">${cobradas}</td>
+      <td class="text-right">${pteCobrar}</td>
+      <td class="text-right">${totUnid}</td>
+      <td class="text-right">${pteVender}</td>
+      <td>
+        <div class="progress-container">
+          <span>${pct}%</span>
+          <div class="progress-bar">
+            <div class="progress-fill ${
+              pct === 100 ? "complete" : ""
+            }" style="width: ${pct}%;"></div>
+          </div>
+        </div>
+      </td>
+      <td class="text-right">${
+        estProduccion > 0
+          ? estProduccion.toLocaleString("es-ES", {
+              style: "currency",
+              currency: "EUR",
+            })
+          : "—"
+      }</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const pctGlobal =
+    totalUnidades > 0 ? Math.round((totalVendidas / totalUnidades) * 100) : 0;
+
+  const trTotal = document.createElement("tr");
+  trTotal.style.backgroundColor = "var(--bg)";
+  trTotal.style.fontWeight = "bold";
+  trTotal.innerHTML = `
+    <td>TOTAL PORTFOLIO</td>
+    <td>—</td>
+    <td class="text-right">${totalVendidas}</td>
+    <td class="text-right">${totalCobradas}</td>
+    <td class="text-right">${totalPteCobrar}</td>
+    <td class="text-right">${totalUnidades}</td>
+    <td class="text-right">${totalPteVender}</td>
+    <td>
+      <div class="progress-container">
+        <span>${pctGlobal}%</span>
+        <div class="progress-bar">
+          <div class="progress-fill ${
+            pctGlobal === 100 ? "complete" : ""
+          }" style="width: ${pctGlobal}%;"></div>
+        </div>
+      </div>
+    </td>
+    <td class="text-right text-accent">${totalEstProduccion.toLocaleString(
+      "es-ES",
+      { style: "currency", currency: "EUR" }
+    )}</td>
+  `;
+  tbody.appendChild(trTotal);
+
+  const elemHeaderEuros = document.getElementById("header-total-euros");
+  const elemHeaderUnidades = document.getElementById("header-total-unidades");
+  if (elemHeaderEuros)
+    elemHeaderEuros.textContent = totalEstProduccion.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    });
+  if (elemHeaderUnidades) elemHeaderUnidades.textContent = totalPteVender;
 }
 
 function actualizarCardsSuperiores(
@@ -343,36 +452,45 @@ function actualizarCardsSuperiores(
   const elemUnidades = document.querySelector(
     ".kpi-card:nth-child(1) .subtext"
   );
-  if (elemProdAcum)
+
+  if (elemProdAcum) {
     elemProdAcum.textContent = totalAcumulado.toLocaleString("es-ES", {
       style: "currency",
       currency: "EUR",
     });
-  if (elemUnidades)
+  }
+  if (elemUnidades) {
     elemUnidades.innerHTML = `Equivalente a <strong>${totalUnidades.toLocaleString(
       "es-ES"
     )} ventas unidades</strong>`;
+  }
 
-  const elemAgencias = document.querySelector(".kpi-card:nth-child(2) .value");
+  const elemGilmarKpi = document.querySelector(".kpi-card:nth-child(2) .value");
   const elemDesglose = document.querySelector(
     ".kpi-card:nth-child(2) .subtext"
   );
-  if (elemAgencias && totalAcumulado > 0)
-    elemAgencias.textContent = totalAgencias.toLocaleString("es-ES", {
+
+  if (elemGilmarKpi && totalAcumulado > 0) {
+    // Destacamos la cantidad de Gilmar en el valor principal de la tarjeta
+    elemGilmarKpi.textContent = totalGilmar.toLocaleString("es-ES", {
       style: "currency",
       currency: "EUR",
     });
+  }
+
   if (elemDesglose && totalAcumulado > 0) {
-    const pctAgencias = ((totalAgencias / totalAcumulado) * 100)
-      .toFixed(1)
-      .replace(".", ",");
     const pctGilmar = ((totalGilmar / totalAcumulado) * 100)
       .toFixed(1)
       .replace(".", ",");
-    elemDesglose.innerHTML = `<strong>${pctAgencias}%</strong> del vol. total | <strong>Gilmar:</strong> ${totalGilmar.toLocaleString(
+    const pctAgencias = ((totalAgencias / totalAcumulado) * 100)
+      .toFixed(1)
+      .replace(".", ",");
+
+    // Mostramos porcentajes y en minúsculas la aportación de agencias
+    elemDesglose.innerHTML = `<strong>Gilmar (${pctGilmar}%)</strong> | <span style="font-size:0.9em; text-transform: lowercase;">${totalAgencias.toLocaleString(
       "es-ES",
       { style: "currency", currency: "EUR" }
-    )} (${pctGilmar}%)`;
+    )} aportación agencias (${pctAgencias}%)</span>`;
   }
 }
 
@@ -613,16 +731,19 @@ function cargarWorkbookEnDashboard(workbook) {
     const produccion = leerHojaExcel(workbook, "Produccion", "mes");
     const portfolio = leerHojaExcel(workbook, "Portfolio", "promocion");
     const captaciones = leerHojaExcel(workbook, "Captaciones", "responsable");
+    const pteCobro = leerHojaExcel(workbook, "Pte de cobro", "promocion");
 
     console.log("Excel cargado correctamente:", {
       Produccion: produccion.length,
       Portfolio: portfolio.length,
       Captaciones: captaciones.length,
+      PteCobro: pteCobro.length,
     });
 
     if (produccion.length) renderizarProduccion(produccion);
     if (portfolio.length) renderizarPortfolio(portfolio);
     if (captaciones.length) renderizarCaptaciones(captaciones);
+    if (pteCobro.length) renderizarPteCobro(pteCobro);
 
     return true;
   } catch (error) {
