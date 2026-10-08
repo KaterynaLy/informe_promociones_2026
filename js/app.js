@@ -227,7 +227,7 @@ function parseCSVToJSON(csvText) {
       .trim()
       .toLowerCase()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\u0300-\u036f]/g, ""),
   );
 
   const result = [];
@@ -263,7 +263,7 @@ function renderizarProduccion(datos) {
     const nombreMes = formatearNombreMes(row.mes || row.periodo);
 
     const prod = parseNumeroEs(
-      row.prodtotal || row.prod_total || row.total || row.prod
+      row.prodtotal || row.prod_total || row.total || row.prod,
     );
     const gilmar = parseNumeroEs(row.gilmar);
     const agencias = parseNumeroEs(row.agencias);
@@ -307,7 +307,7 @@ function renderizarProduccion(datos) {
     <td>TOTAL ACUMULADO</td>
     <td class="text-right text-accent">${totalAcumulado.toLocaleString(
       "es-ES",
-      { style: "currency", currency: "EUR" }
+      { style: "currency", currency: "EUR" },
     )}</td>
     <td class="text-right">${totalGilmar.toLocaleString("es-ES", {
       style: "currency",
@@ -325,7 +325,7 @@ function renderizarProduccion(datos) {
     totalAcumulado,
     totalGilmar,
     totalAgencias,
-    totalUnidades
+    totalUnidades,
   );
 }
 
@@ -351,14 +351,14 @@ function renderizarPortfolio(datos) {
     const vendidas = parseNumeroEs(row.vendidas);
     const cobradas = parseNumeroEs(row.cobradas);
     const pteCobrar = parseNumeroEs(
-      row.ptedecobro || row.pte_cobro || row.ptecobrar
+      row.ptedecobro || row.pte_cobro || row.ptecobrar,
     );
     const totUnid = parseNumeroEs(
-      row.totunid || row.totunidades || row.totalunidades
+      row.totunid || row.totunidades || row.totalunidades,
     );
     const pteVender = parseNumeroEs(row.ptevender || row.pte_vender);
     const estProduccion = parseNumeroEs(
-      row.estproduccion || row.est_produccion || row.produccion
+      row.estproduccion || row.est_produccion || row.produccion,
     );
 
     totalVendidas += vendidas;
@@ -427,7 +427,7 @@ function renderizarPortfolio(datos) {
     </td>
     <td class="text-right text-accent">${totalEstProduccion.toLocaleString(
       "es-ES",
-      { style: "currency", currency: "EUR" }
+      { style: "currency", currency: "EUR" },
     )}</td>
   `;
   tbody.appendChild(trTotal);
@@ -460,7 +460,7 @@ function renderizarPteCobro(datos) {
       row.ptedecobrounidades ||
         row["ptedecobro,unidades"] ||
         row.ptedecobro ||
-        row.unidades
+        row.unidades,
     );
 
     // Obtém o valor em euros da produção pendente
@@ -468,7 +468,7 @@ function renderizarPteCobro(datos) {
       row.cantidadenproduccionpte ||
         row["cantidadenproduccionpte,€"] ||
         row.produccionpte ||
-        row.cantidadenproduccionpte
+        row.cantidadenproduccionpte,
     );
 
     totalUnidadesPte += unidades;
@@ -495,22 +495,21 @@ function renderizarPteCobro(datos) {
     <td class="text-right">${totalUnidadesPte}</td>
     <td class="text-right text-accent">${totalProduccionPte.toLocaleString(
       "es-ES",
-      { style: "currency", currency: "EUR" }
+      { style: "currency", currency: "EUR" },
     )}</td>
   `;
   tbody.appendChild(trTotal);
 }
 
-
 function actualizarCardsSuperiores(
   totalAcumulado,
   totalGilmar,
   totalAgencias,
-  totalUnidades
+  totalUnidades,
 ) {
   const elemProdAcum = document.querySelector(".kpi-card:nth-child(1) .value");
   const elemUnidades = document.querySelector(
-    ".kpi-card:nth-child(1) .subtext"
+    ".kpi-card:nth-child(1) .subtext",
   );
 
   if (elemProdAcum) {
@@ -521,13 +520,13 @@ function actualizarCardsSuperiores(
   }
   if (elemUnidades) {
     elemUnidades.innerHTML = `Equivalente a <strong>${totalUnidades.toLocaleString(
-      "es-ES"
+      "es-ES",
     )} ventas unidades</strong>`;
   }
 
   const elemGilmarKpi = document.querySelector(".kpi-card:nth-child(2) .value");
   const elemDesglose = document.querySelector(
-    ".kpi-card:nth-child(2) .subtext"
+    ".kpi-card:nth-child(2) .subtext",
   );
 
   if (elemGilmarKpi && totalAcumulado > 0) {
@@ -549,7 +548,7 @@ function actualizarCardsSuperiores(
     // Mostramos porcentajes y en minúsculas la aportación de agencias
     elemDesglose.innerHTML = `<strong>Gilmar (${pctGilmar}%)</strong> | <span style="font-size:0.9em; text-transform: lowercase;">${totalAgencias.toLocaleString(
       "es-ES",
-      { style: "currency", currency: "EUR" }
+      { style: "currency", currency: "EUR" },
     )} aportación agencias (${pctAgencias}%)</span>`;
   }
 }
@@ -576,11 +575,11 @@ function renderizarPortfolio(datos) {
     const vendidas = parseNumeroEs(row.vendidas);
     const cobradas = parseNumeroEs(row.cobradas);
     const totUnid = parseNumeroEs(
-      row.totunid || row.totunidades || row.totalunidades
+      row.totunid || row.totunidades || row.totalunidades,
     );
     const pteVender = parseNumeroEs(row.ptevender || row.pte_vender);
     const estProduccion = parseNumeroEs(
-      row.estproduccion || row.est_produccion || row.produccion
+      row.estproduccion || row.est_produccion || row.produccion,
     );
 
     totalVendidas += vendidas;
@@ -643,7 +642,7 @@ function renderizarPortfolio(datos) {
         </td>
         <td class="text-right text-accent">${totalEstProduccion.toLocaleString(
           "es-ES",
-          { style: "currency", currency: "EUR" }
+          { style: "currency", currency: "EUR" },
         )}</td>
     `;
   tbody.appendChild(trTotal);
@@ -786,6 +785,42 @@ function mostrarErrorExcel(mensaje) {
   }
 }
 
+// --- RENDERIZADO DE ACTIVIDAD Y CONVERSIÓN DE AGENCIAS ---
+function renderizarActividadAgencias(datos) {
+  // Busca el tbody de la tabla del apartado de agencias
+  const cardAgencias = Array.from(document.querySelectorAll(".card")).find(
+    (card) =>
+      card
+        .querySelector("h2")
+        ?.textContent.includes("Actividad y conversión del canal de agencias"),
+  );
+
+  if (!cardAgencias) return;
+  const tbody = cardAgencias.querySelector("tbody");
+  if (!tbody || !datos || datos.length === 0) return;
+
+  tbody.innerHTML = "";
+
+  datos.forEach((row) => {
+    const kpi = row.kpi || Object.values(row)[0] || "";
+    if (!kpi) return;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${kpi}</strong></td>
+      <td class="text-center">${row.enero || row.ene || "—"}</td>
+      <td class="text-center">${row.febrero || row.feb || "—"}</td>
+      <td class="text-center">${row.marzo || row.mar || "—"}</td>
+      <td class="text-center">${row.abril || row.abr || "—"}</td>
+      <td class="text-center">${row.mayo || row.may || "—"}</td>
+      <td class="text-center">${row.junio || row.jun || "—"}</td>
+      <td class="text-center">${row.julio || row.jul || "—"}</td>
+      <td class="text-center">${row.agosto || row.ago || "—"}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 function cargarWorkbookEnDashboard(workbook) {
   try {
     const produccion = leerHojaExcel(workbook, "Produccion", "mes");
@@ -793,17 +828,15 @@ function cargarWorkbookEnDashboard(workbook) {
     const captaciones = leerHojaExcel(workbook, "Captaciones", "responsable");
     const pteCobro = leerHojaExcel(workbook, "Pte de cobro", "promocion");
 
-    console.log("Excel cargado correctamente:", {
-      Produccion: produccion.length,
-      Portfolio: portfolio.length,
-      Captaciones: captaciones.length,
-      PteCobro: pteCobro.length,
-    });
-
     if (produccion.length) renderizarProduccion(produccion);
     if (portfolio.length) renderizarPortfolio(portfolio);
     if (captaciones.length) renderizarCaptaciones(captaciones);
     if (pteCobro.length) renderizarPteCobro(pteCobro);
+
+    // >>> AÑADIR ESTA LÍNEA AQUÍ <<<
+    if (typeof cargarAgenciasDesdeWorkbook === "function") {
+      cargarAgenciasDesdeWorkbook(workbook);
+    }
 
     return true;
   } catch (error) {
@@ -825,7 +858,7 @@ function procesarExcel(event) {
       cargarWorkbookEnDashboard(workbook);
     } catch (error) {
       mostrarErrorExcel(
-        "No se pudo leer el Excel seleccionado: " + error.message
+        "No se pudo leer el Excel seleccionado: " + error.message,
       );
     }
   };
@@ -862,7 +895,7 @@ async function cargarExcelLocal() {
       'No se ha podido abrir "plantillas/datos_mes.xlsx". ' +
         "Comprueba que el archivo esté exactamente en la carpeta plantillas. " +
         "Detalle: " +
-        error.message
+        error.message,
     );
     return false;
   }
@@ -887,3 +920,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   await cargarExcelLocal();
 });
+
+if (typeof cargarAgenciasDesdeWorkbook === "function") {
+  cargarAgenciasDesdeWorkbook(workbook);
+}
