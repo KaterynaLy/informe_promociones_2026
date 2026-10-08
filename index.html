@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <!-- Librería para procesar Excel -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
   </head>
   <body>
     <div id="pantalla-login" style="
@@ -400,6 +401,23 @@
             <strong>Gilmar:</strong> 58.971.622,00 € (42,7%)
           </div>
         </div>
+        <div class="kpi-grid" style="margin-bottom: 20px;">
+        <div class="kpi-card" style="border-left: 4px solid var(--success, #10b981);">
+          <div class="title">Total Cobrado (Pagado)</div>
+          <div class="value" style="color: var(--success, #10b981);">3.681.026,89 €</div>
+          <div class="subtext">
+            <strong>Factura 1:</strong> 3.069.811,64 € | <strong>Factura 2:</strong> 611.215,25 €
+          </div>
+        </div>
+
+        <div class="kpi-card" style="border-left: 4px solid var(--warning, #f59e0b);">
+          <div class="title">Total Pendiente de Cobro</div>
+          <div class="value" style="color: var(--warning, #f59e0b);">746.760,36 €</div>
+          <div class="subtext">
+            <strong>Factura 1:</strong> 251.701,63 € | <strong>Factura 2:</strong> 495.058,73 €
+          </div>
+        </div>
+      </div>
       </div>
 
       <div class="content-grid">
@@ -1117,6 +1135,9 @@
           </div>
         </div>
       </div>
+      <a href="personal.html" target="_blank" class="btn-report">
+        👥 Flujo de personal: cronología de cambios, altas y bajas
+      </a>
     </div>
 
     <!-- JS principal -->
