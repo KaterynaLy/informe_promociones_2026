@@ -519,3 +519,46 @@ tr.highlight-julio td {
 .btn-global-download:hover {
     background-color: #047857;
 }
+/* PRUEBA: hacer visible la tabla de agencias */
+#tabla-agencias {
+    display: table !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 900px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+#tabla-agencias thead {
+    display: table-header-group !important;
+    visibility: visible !important;
+}
+
+#tabla-agencias tbody {
+    display: table-row-group !important;
+    visibility: visible !important;
+}
+
+#tabla-agencias tr {
+    display: table-row !important;
+    visibility: visible !important;
+}
+
+#tabla-agencias th,
+#tabla-agencias td {
+    display: table-cell !important;
+    visibility: visible !important;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+#tabla-agencias th {
+    background: #f1f5f9;
+    font-weight: 600;
+}
+
+#tabla-agencias td:first-child {
+    min-width: 180px;
+}

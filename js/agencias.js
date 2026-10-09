@@ -1,81 +1,164 @@
-// --- MÓDULO INDEPENDIENTE PARA CANAL DE AGENCIAS ---
+// Renderizado del apartado "Actividad y conversión del canal de agencias".
+(function () {
+  "use strict";
 
-function cargarAgenciasDesdeWorkbook(workbook) {
-  if (typeof leerHojaExcel !== "function") {
-    console.warn("La función 'leerHojaExcel' no está disponible en app.js");
-    return;
+  function normalizarClaveAgencias(clave) {
+    return String(clave ?? "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\s_-]+/g, "");
   }
 
-  // Lee la pestaña "Agencias" del Excel usando "kpi" como clave
-  const actividadAgencias = leerHojaExcel(workbook, "Agencias", "kpi");
+  function buscarTablaAgencias() {
+    let tabla = document.querySelector("#tabla-agencias");
+    if (tabla) return tabla;
 
-  if (actividadAgencias && actividadAgencias.length > 0) {
-    renderizarActividadAgencias(actividadAgencias);
-  } else {
-    console.warn("No se obtuvieron filas de la hoja 'Agencias'.");
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const card = cards.find((elemento) =>
+      (elemento.querySelector("h2")?.textContent || "")
+        .toLowerCase()
+        .includes("actividad y conversión del canal de agencias"),
+    );
+
+    return card?.querySelector("table") || null;
   }
-}
 
-function renderizarActividadAgencias(datos) {
-  // 1. Búsqueda directa del tbody en la tarjeta de agencias
-  let tbody = document.querySelector("#tabla-agencias tbody");
+  function renderizarActividadAgencias(datos) {
+    const tabla = buscarTablaAgencias();
+    const tbody = tabla?.querySelector("tbody");
 
-  // Si no le habías puesto id a la tabla, buscamos por el encabezado de la tarjeta
-  if (!tbody) {
-    const cards = document.querySelectorAll(".card");
-    for (const card of cards) {
-      const h2 = card.querySelector("h2");
-      if (h2 && h2.textContent.toLowerCase().includes("actividad")) {
-        tbody = card.querySelector("tbody");
-        break;
-      }
+    if (!tbody) {
+      console.error(
+        '[Agencias] No se encontró la tabla. Comprueba que index.html contiene <table id="tabla-agencias">.',
+      );
+      return;
     }
+
+    if (!Array.isArray(datos) || datos.length === 0) {
+      console.warn('[Agencias] La hoja "Agencias" no contiene filas de datos.');
+      tbody.innerHTML =
+        '<tr><td colspan="13">No hay datos de agencias en el Excel.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = "";
+
+    const meses = [
+      ["enero"],
+      ["febrero"],
+      ["marzo"],
+      ["abril"],
+      ["mayo"],
+      ["junio"],
+      ["julio"],
+      ["agosto"],
+      ["septiembre", "setiembre"],
+      ["octubre"],
+      ["noviembre"],
+      ["diciembre"],
+    ];
+
+    let filasPintadas = 0;
+
+    datos.forEach((fila) => {
+      const normalizada = {};
+
+      Object.entries(fila || {}).forEach(([clave, valor]) => {
+        normalizada[normalizarClaveAgencias(clave)] = valor;
+      });
+
+      const kpi = normalizada.kpi ?? Object.values(normalizada)[0] ?? "";
+
+      if (String(kpi).trim() === "") return;
+
+      const tr = document.createElement("tr");
+      const tdKpi = document.createElement("td");
+      const strong = document.createElement("strong");
+
+      strong.textContent = String(kpi);
+      tdKpi.appendChild(strong);
+      tr.appendChild(tdKpi);
+
+      meses.forEach((variantes) => {
+        let valor;
+
+        for (const mes of variantes) {
+          const clave = normalizarClaveAgencias(mes);
+
+          if (
+            normalizada[clave] !== undefined &&
+            normalizada[clave] !== null &&
+            String(normalizada[clave]).trim() !== ""
+          ) {
+            valor = normalizada[clave];
+            break;
+          }
+        }
+
+        const td = document.createElement("td");
+        td.className = "text-center";
+        td.textContent = valor === undefined ? "—" : String(valor);
+
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+      filasPintadas++;
+    });
+
+    if (filasPintadas === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="13">No se han encontrado KPI. Revisa la primera columna de la hoja Agencias.</td></tr>';
+    }
+
+    console.info(`[Agencias] Tabla renderizada: ${filasPintadas} KPI.`);
   }
 
-  if (!tbody) {
-    console.error("No se encontró la tabla de Agencias en el HTML.");
-    return;
-  }
+  function cargarAgenciasDesdeWorkbook(workbook) {
+    if (!workbook || !workbook.Sheets) {
+      console.error("[Agencias] No se ha recibido un libro Excel válido.");
+      return;
+    }
 
-  if (!datos || datos.length === 0) return;
+    const nombreHoja = workbook.SheetNames?.find(
+      (nombre) => normalizarClaveAgencias(nombre) === "agencias",
+    );
 
-  tbody.innerHTML = "";
+    const hoja = nombreHoja ? workbook.Sheets[nombreHoja] : null;
 
-  datos.forEach((row) => {
-    // Obtiene el nombre del KPI
-    const kpi = row.kpi || Object.values(row)[0] || "";
-    if (!kpi) return;
+    if (!hoja) {
+      console.error(
+        '[Agencias] No existe una hoja llamada "Agencias". Hojas encontradas:',
+        workbook.SheetNames || [],
+      );
 
-    // Helper para limpiar nulos, undefined o NaN
-    const val = (campo) => {
-      const v = row[campo];
-      if (
-        v === undefined ||
-        v === null ||
-        v === "" ||
-        String(v).toLowerCase() === "nan"
-      ) {
-        return "—";
+      const tbody = buscarTablaAgencias()?.querySelector("tbody");
+
+      if (tbody) {
+        tbody.innerHTML =
+          '<tr><td colspan="13">No se encuentra la hoja Agencias en el Excel.</td></tr>';
       }
-      return v;
-    };
 
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><strong>${kpi}</strong></td>
-      <td class="text-center">${val("enero")}</td>
-      <td class="text-center">${val("febrero")}</td>
-      <td class="text-center">${val("marzo")}</td>
-      <td class="text-center">${val("abril")}</td>
-      <td class="text-center">${val("mayo")}</td>
-      <td class="text-center">${val("junio")}</td>
-      <td class="text-center">${val("julio")}</td>
-      <td class="text-center">${val("agosto")}</td>
-      <td class="text-center">${val("septiembre")}</td>
-      <td class="text-center">${val("octubre")}</td>
-      <td class="text-center">${val("noviembre")}</td>
-      <td class="text-center">${val("diciembre")}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
+      return;
+    }
+
+    const datos = XLSX.utils.sheet_to_json(hoja, {
+      defval: "",
+      raw: true,
+      blankrows: false,
+    });
+
+    console.info(
+      `[Agencias] Leídas ${datos.length} filas desde la hoja "${nombreHoja}".`,
+    );
+
+    renderizarActividadAgencias(datos);
+  }
+
+  // Permite que app.js acceda a estas funciones.
+  window.cargarAgenciasDesdeWorkbook = cargarAgenciasDesdeWorkbook;
+
+  window.renderizarActividadAgencias = renderizarActividadAgencias;
+})();

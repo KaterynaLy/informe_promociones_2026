@@ -920,7 +920,3 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   await cargarExcelLocal();
 });
-
-if (typeof cargarAgenciasDesdeWorkbook === "function") {
-  cargarAgenciasDesdeWorkbook(workbook);
-}
